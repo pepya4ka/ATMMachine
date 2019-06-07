@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd25bc21-9ee9-4785-b0bc-5af80b03825f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$MyDrawPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$MyDrawPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$RunnableForCircle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$RunnableForCircle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$textArea1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$textArea1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$textArea2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$textArea2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$textArea3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM$textArea3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TextFieldWithThread/ATM/AppearanceATM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TextFieldWithThread/META-INF/TextFieldWithThread.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ATM/AppearanceATM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ATM/AppearanceATM.java" afterDir="false" />
-    </list>
+    <list default="true" id="cd25bc21-9ee9-4785-b0bc-5af80b03825f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +13,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ATM/Account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
+            <state relative-caret-position="702">
               <caret line="49" column="111" selection-start-line="49" selection-start-column="111" selection-end-line="49" selection-end-column="111" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -39,11 +28,9 @@
         <entry file="file://$PROJECT_DIR$/src/ATM/AppearanceATM.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="324">
-              <caret line="127" column="34" lean-forward="true" selection-start-line="127" selection-start-column="34" selection-end-line="127" selection-end-column="34" />
+              <caret line="127" column="34" selection-start-line="127" selection-start-column="34" selection-end-line="127" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12421#17247#0" />
-                <element signature="e#27035#34312#0" />
               </folding>
             </state>
           </provider>
@@ -209,11 +196,12 @@
       <workItem from="1559729283522" duration="856000" />
       <workItem from="1559746029291" duration="6856000" />
       <workItem from="1559756383812" duration="4434000" />
+      <workItem from="1559930115403" duration="277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72951000" />
+    <option name="totallyTimeSpent" value="73228000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -240,7 +228,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32863188" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32829374" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32181427" />
       <window_info anchor="bottom" id="Services" order="13" />
@@ -307,6 +295,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ATM/Account.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="49" column="111" selection-start-line="49" selection-start-column="111" selection-end-line="49" selection-end-column="111" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Account#0;class#Account#0" />
+            <element signature="method#Account#1;class#Account#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ATM/ReturnAddOrPull.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -321,26 +321,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ATM/Account.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="49" column="111" selection-start-line="49" selection-start-column="111" selection-end-line="49" selection-end-column="111" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Account#0;class#Account#0" />
-            <element signature="method#Account#1;class#Account#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ATM/AppearanceATM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="127" column="34" lean-forward="true" selection-start-line="127" selection-start-column="34" selection-end-line="127" selection-end-column="34" />
+          <caret line="127" column="34" selection-start-line="127" selection-start-column="34" selection-end-line="127" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12421#17247#0" />
-            <element signature="e#27035#34312#0" />
           </folding>
         </state>
       </provider>
