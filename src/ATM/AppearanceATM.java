@@ -12,45 +12,61 @@ public class AppearanceATM implements ActionListener {
 
     private static JFrame jFrame;
 
-    private JPanel jPanel;//в нем находятся JLabels и Scrollers
+    private JPanel jPanel;//в нем находятся JLabels
+    private JPanel jPanelForScroller;//в нем находятся Scroller's
     private JPanel jPanelForButton;//панель для кнопок
 
-    JLabel jLabelJPanel1;//1 банкомат
-    static JTextArea jTextAreaJPanel1;
+    private JLabel jLabelJPanel1;//1 банкомат
+    private JLabel jLabelNumberOperation1;//Кол-во операций 1 банкомата
+    private JLabel jLabelEvent1;//Состояние банкомата 1
+    private static JTextArea jTextAreaJPanel1;
 
-    JLabel jLabelJPanel2;//2 банкомат
-    static JTextArea jTextAreaJPanel2;
+    private JLabel jLabelJPanel2;//2 банкомат
+    private JLabel jLabelNumberOperation2;//Кол-во операций 2 банкомата
+    private JLabel jLabelEvent2;//Состояние банкомата 2
+    private static JTextArea jTextAreaJPanel2;
 
-    JLabel jLabelJPanel3;//3 банкомат
-    static JTextArea jTextAreaJPanel3;
+    private JLabel jLabelJPanel3;//3 банкомат
+    private JLabel jLabelNumberOperation3;//Кол-во операций 3 банкомата
+    private JLabel jLabelEvent3;//Состояние банкомата 3
+    private static JTextArea jTextAreaJPanel3;
 
-    static JButton jButtonBeginAndEnd;//кнопка начать/закончить
-    static JButton jButtonTechnicalSupport1;//кнопка вызова технической поддержки для банкомата 1
-    static JButton jButtonTechnicalSupport2;//кнопка вызова технической поддержки для банкомата 2
-    static JButton jButtonTechnicalSupport3;//кнопка вызова технической поддержки для банкомата 3
+    private static JButton jButtonBeginAndEnd;//кнопка начать/закончить
+    private static JButton jButtonTechnicalSupport1;//кнопка вызова технической поддержки для банкомата 1
+    private static JButton jButtonTechnicalSupport2;//кнопка вызова технической поддержки для банкомата 2
+    private static JButton jButtonTechnicalSupport3;//кнопка вызова технической поддержки для банкомата 3
 
-    static Runnable textArea1, textArea2, textArea3;
-    static Thread myThread1, myThread2, myThread3;
+    private static Runnable textArea1, textArea2, textArea3;
+    private static Thread myThread1, myThread2, myThread3;
 
-    static MyDrawPanel drawPanel;
-    Color xColor;
-    static Runnable runnableCircle, runnableGo;
-    static Thread threadCircle, threadGo;
+    private static MyDrawPanel drawPanel;
+    private Color xColor;
+    private static Runnable runnableCircle;
+    private static Thread threadCircle;
 
-    static ArrayList<Account> accounts;
-    static HashSet<Integer> setNumberAccounts;
+    private static ArrayList<Account> accounts;
+    private static HashSet<Integer> setNumberAccounts;
 
-    static boolean fl = false;//работает или нет
-    static boolean bankomat1 = true;//работа банкомата 1
-    static boolean bankomat2 = true;//работа банкомата 1
-    static boolean bankomat3 = true;//работа банкомата 1
+    private static boolean fl = false;//работает или нет
+    private static boolean bankomat1 = true;//работа банкомата 1
+    private static boolean bankomat2 = true;//работа банкомата 1
+    private static boolean bankomat3 = true;//работа банкомата 1
 
-    public void go() {
+    private static int numberOperation1;//Количество операци банкомата 1
+    private static int numberOperation2;//Количество операци банкомата 2
+    private static int numberOperation3;//Количество операци банкомата 3
+    private static int bankomatCashAmount1;//Сумма денег в банкомата 1
+    private static int bankomatCashAmount2;//Сумма денег в банкомата 1
+    private static int bankomatCashAmount3;//Сумма денег в банкомата 1
+
+    private void go() {
 
         jFrame = new JFrame("Система банкоматов");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         jLabelJPanel1 = new JLabel("1 банкомат");
+        jLabelNumberOperation1 = new JLabel("Количество завершенных операций: ");
+        jLabelEvent1 = new JLabel("Состояние: ");
         jTextAreaJPanel1 = new JTextArea(2, 3);
         JScrollPane scroller1 = new JScrollPane(jTextAreaJPanel1);
         jTextAreaJPanel1.setLineWrap(true);
@@ -59,6 +75,8 @@ public class AppearanceATM implements ActionListener {
         jTextAreaJPanel1.setEditable(false);//запрещает изменять текст в поле
 
         jLabelJPanel2 = new JLabel("2 банкомат");
+        jLabelNumberOperation2 = new JLabel("Количество завершенных операций: ");
+        jLabelEvent2 = new JLabel("Состояние: ");
         jTextAreaJPanel2 = new JTextArea(2, 3);
         JScrollPane scroller2 = new JScrollPane(jTextAreaJPanel2);
         jTextAreaJPanel2.setLineWrap(true);
@@ -67,6 +85,8 @@ public class AppearanceATM implements ActionListener {
         jTextAreaJPanel2.setEditable(false);//запрещает изменять текст в поле
 
         jLabelJPanel3 = new JLabel("3 банкомат");
+        jLabelNumberOperation3 = new JLabel("Количество завершенных операций: ");
+        jLabelEvent3 = new JLabel("Состояние: ");
         jTextAreaJPanel3 = new JTextArea(2, 3);
         JScrollPane scroller3 = new JScrollPane(jTextAreaJPanel3);
         jTextAreaJPanel3.setLineWrap(true);
@@ -75,13 +95,37 @@ public class AppearanceATM implements ActionListener {
         jTextAreaJPanel3.setEditable(false);//запрещает изменять текст в поле
 
         jPanel = new JPanel();
-        jPanel.setLayout(new GridLayout(3, 2));
+        jPanel.setLayout(new GridLayout(6, 2));
         jPanel.add(jLabelJPanel1);
+        jPanel.add(jLabelNumberOperation1);
+        jPanel.add(jLabelEvent1);
         jPanel.add(scroller1);
+
         jPanel.add(jLabelJPanel2);
+        jPanel.add(jLabelNumberOperation2);
+        jPanel.add(jLabelEvent2);
         jPanel.add(scroller2);
+
+
         jPanel.add(jLabelJPanel3);
+        jPanel.add(jLabelNumberOperation3);
+        jPanel.add(jLabelEvent3);
         jPanel.add(scroller3);
+
+
+        jPanel.revalidate();
+
+//        jPanelForScroller = new JPanel();
+//        jPanelForScroller.setLayout(new GridLayout(3, 1));
+//        jPanelForScroller.add(scroller1);
+//        jPanelForScroller.add(scroller2);
+//        jPanelForScroller.add(scroller3);
+        numberOperation1 = 0;
+        numberOperation2 = 0;
+        numberOperation3 = 0;
+        bankomatCashAmount1 = 100;
+        bankomatCashAmount2 = 150;
+        bankomatCashAmount3 = 400;
 
 
         Font BigFontTR = new Font("TimesRoman", Font.BOLD, 15);//Шрифт текста на кнопке
@@ -109,6 +153,7 @@ public class AppearanceATM implements ActionListener {
         drawPanel = new MyDrawPanel();
 
         jFrame.getContentPane().add(BorderLayout.CENTER, jPanel);
+//        jFrame.getContentPane().add(BorderLayout.CENTER, jPanelForScroller);
         jFrame.getContentPane().add(BorderLayout.EAST, jPanelForButton);
         jFrame.getContentPane().add(BorderLayout.NORTH, drawPanel);
 
@@ -287,10 +332,15 @@ public class AppearanceATM implements ActionListener {
     public void runAccountActions1(int number) {
         try {
             setNumberAccounts.remove(number);
-            StringBuffer temp = new StringBuffer(accounts.get(number).accoutAction());
+            ReturnAddOrPull returnAddOrPull = accounts.get(number).accoutAction();
+            StringBuffer temp = new StringBuffer(returnAddOrPull.action);
+            if (bankomatCashAmount1 > 0) jLabelEvent1.setText("Состояние: банкомат полностью исправен");
             jTextAreaJPanel1.append(String.valueOf(number) + " " + temp.toString() + "\n");
+            numberOperation1++;
+            jLabelNumberOperation1.setText("Количество завершенных операций: " + numberOperation1);
             myThread1.sleep(2500 - new Random().nextInt(500));
-            if ((new Random().nextInt(50)) < 2) {
+            int tempError = new Random().nextInt(50);
+            if (tempError < 1) {//рандом ошибки
                 bankomat1 = false;
                 JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 1\n" +
                         "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -300,11 +350,88 @@ public class AppearanceATM implements ActionListener {
                 }
                 while (!bankomat1);
             }
-            temp.replace(0, temp.length(), accounts.get(number).accoutAction());
+            returnAddOrPull = accounts.get(number).accoutAction();
+            temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+            if (bankomatCashAmount1 > 0) jLabelEvent1.setText("Состояние: банкомат полностью исправен");
             while (!temp.substring(0).equals(AccountActions.END_OF_SERVICE.getTitle())) {
-                jTextAreaJPanel1.append(temp.toString() + "\n");
-                myThread1.sleep(2500 - new Random().nextInt(500));
-                if ((new Random().nextInt(50)) < 2) {
+                if (bankomatCashAmount1 != 0) {
+                    jLabelEvent1.setText("Состояние: банкомат полностью исправен");
+                if ( (bankomatCashAmount1 < Math.abs(returnAddOrPull.addOrPull)) && (returnAddOrPull.addOrPull < 0) && temp.substring(0).equals((AccountActions.PULL_OFF.getTitle())) ) {
+                    returnAddOrPull.addOrPull = -bankomatCashAmount1;
+                    jTextAreaJPanel1.append(String.valueOf(AccountActions.PULL_OFF.getTitle()) + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                    bankomatCashAmount1 += returnAddOrPull.addOrPull;
+                    numberOperation1++;
+                    jLabelNumberOperation1.setText("Количество завершенных операций: " + numberOperation1);
+                    jLabelEvent1.setText("Состояние: банкомат недоступен для снятия");
+                    myThread1.sleep(2500 - new Random().nextInt(500));
+                    returnAddOrPull = accounts.get(number).accoutAction();
+                    temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    continue;
+                }
+                    jTextAreaJPanel1.append(temp.toString() + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                    bankomatCashAmount1 += returnAddOrPull.addOrPull;
+                    if (bankomatCashAmount1 > 0) jLabelEvent1.setText("Состояние: банкомат полностью исправен");
+                    numberOperation1++;
+                    jLabelNumberOperation1.setText("Количество завершенных операций: " + numberOperation1);
+                    myThread1.sleep(2500 - new Random().nextInt(500));
+                    tempError = new Random().nextInt(50);
+                    if (tempError < 1) {//рандом ошибки
+                        bankomat1 = false;
+                        JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 1\n" +
+                                "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        jButtonTechnicalSupport1.setEnabled(!bankomat1);
+                        do {
+                            myThread1.sleep(500);
+                        }
+                        while (!bankomat1);
+                    }
+                    returnAddOrPull = accounts.get(number).accoutAction();
+                    temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                } else {
+                    jLabelEvent1.setText("Состояние: банкомат недоступен для снятия");
+                    if (!temp.substring(0).equals(AccountActions.PULL_OFF.getTitle())) {
+                        jTextAreaJPanel1.append(temp.toString() + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                        bankomatCashAmount1 += returnAddOrPull.addOrPull;
+                        if (bankomatCashAmount1 > 0) jLabelEvent1.setText("Состояние: банкомат полностью исправен");
+                        numberOperation1++;
+                        jLabelNumberOperation1.setText("Количество завершенных операций: " + numberOperation1);
+                        myThread1.sleep(2500 - new Random().nextInt(500));
+                        tempError = new Random().nextInt(50);
+                        if (tempError < 1) {//рандом ошибки
+                            bankomat1 = false;
+                            JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 1\n" +
+                                    "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                            jButtonTechnicalSupport1.setEnabled(!bankomat1);
+                            do {
+                                myThread1.sleep(500);
+                            }
+                            while (!bankomat1);
+                        }
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    } else {
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    }
+                }
+            }
+            jTextAreaJPanel1.append(temp.toString() + "\n");
+            numberOperation1++;
+            jLabelNumberOperation1.setText("Количество завершенных операций: " + numberOperation1);
+            myThread1.sleep(2500 - new Random().nextInt(500));
+            tempError = new Random().nextInt(50);
+            if (tempError < 1) {//рандом ошибки
+                bankomat1 = false;
+                JOptionPane.showMessageDialog(jFrame, "Банкомат 1 съел карту\n" +
+                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                jButtonTechnicalSupport1.setEnabled(!bankomat1);
+                do {
+                    myThread1.sleep(500);
+                }
+                while (!bankomat1);
+            } else {
+                tempError = new Random().nextInt(50);
+                if (tempError < 1) {//рандом ошибки
                     bankomat1 = false;
                     JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 1\n" +
                             "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -314,28 +441,6 @@ public class AppearanceATM implements ActionListener {
                     }
                     while (!bankomat1);
                 }
-                temp.replace(0, temp.length(), accounts.get(number).accoutAction());
-            }
-            jTextAreaJPanel1.append(temp.toString() + "\n");
-            myThread1.sleep(2500 - new Random().nextInt(500));
-            if ((new Random().nextInt(25)) < 2) {
-                bankomat1 = false;
-                JOptionPane.showMessageDialog(jFrame, "Банкомат 1 съел карту\n" +
-                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                jButtonTechnicalSupport1.setEnabled(!bankomat1);
-                do {
-                    myThread1.sleep(500);
-                }
-                while (!bankomat1);
-            } else if ((new Random().nextInt(50)) < 2) {
-                bankomat1 = false;
-                JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 1\n" +
-                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                jButtonTechnicalSupport1.setEnabled(!bankomat1);
-                do {
-                    myThread1.sleep(500);
-                }
-                while (!bankomat1);
             }
             return;
         } catch (InterruptedException e) {
@@ -346,10 +451,15 @@ public class AppearanceATM implements ActionListener {
     public void runAccountActions2(int number) {
         try {
             setNumberAccounts.remove(number);
-            StringBuffer temp = new StringBuffer(accounts.get(number).accoutAction());
+            ReturnAddOrPull returnAddOrPull = accounts.get(number).accoutAction();
+            StringBuffer temp = new StringBuffer(returnAddOrPull.action);
+            if (bankomatCashAmount2 > 0) jLabelEvent2.setText("Состояние: банкомат полностью исправен");
             jTextAreaJPanel2.append(String.valueOf(number) + " " + temp.toString() + "\n");
+            numberOperation2++;
+            jLabelNumberOperation2.setText("Количество завершенных операций: " + numberOperation2);
             myThread2.sleep(2500 - new Random().nextInt(500));
-            if ((new Random().nextInt(55))< 2) {
+            int tempError = new Random().nextInt(50);
+            if (tempError < 1) {//рандом ошибки
                 bankomat2 = false;
                 JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 2\n" +
                         "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -359,11 +469,88 @@ public class AppearanceATM implements ActionListener {
                 }
                 while (!bankomat2);
             }
-            temp.replace(0, temp.length(), accounts.get(number).accoutAction());
+            returnAddOrPull = accounts.get(number).accoutAction();
+            temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+            if (bankomatCashAmount2 > 0) jLabelEvent2.setText("Состояние: банкомат полностью исправен");
             while (!temp.substring(0).equals(AccountActions.END_OF_SERVICE.getTitle())) {
-                jTextAreaJPanel2.append(temp.toString() + "\n");
-                myThread2.sleep(2500 - new Random().nextInt(500));
-                if ((new Random().nextInt(55)) < 2) {
+                if (bankomatCashAmount2 != 0) {
+                    jLabelEvent2.setText("Состояние: банкомат полностью исправен");
+                    if ( (bankomatCashAmount2 < Math.abs(returnAddOrPull.addOrPull)) && (returnAddOrPull.addOrPull < 0) && temp.substring(0).equals((AccountActions.PULL_OFF.getTitle())) ) {
+                        returnAddOrPull.addOrPull = -bankomatCashAmount2;
+                        jTextAreaJPanel2.append(String.valueOf(AccountActions.PULL_OFF.getTitle()) + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                        bankomatCashAmount2 += returnAddOrPull.addOrPull;
+                        numberOperation2++;
+                        jLabelNumberOperation2.setText("Количество завершенных операций: " + numberOperation2);
+                        jLabelEvent2.setText("Состояние: банкомат недоступен для снятия");
+                        myThread2.sleep(2500 - new Random().nextInt(500));
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                        continue;
+                    }
+                    jTextAreaJPanel2.append(temp.toString() + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                    bankomatCashAmount2 += returnAddOrPull.addOrPull;
+                    if (bankomatCashAmount2 > 0) jLabelEvent2.setText("Состояние: банкомат полностью исправен");
+                    numberOperation2++;
+                    jLabelNumberOperation2.setText("Количество завершенных операций: " + numberOperation2);
+                    myThread2.sleep(2500 - new Random().nextInt(500));
+                    tempError = new Random().nextInt(50);
+                    if (tempError < 1) {//рандом ошибки
+                        bankomat2 = false;
+                        JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 2\n" +
+                                "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        jButtonTechnicalSupport2.setEnabled(!bankomat2);
+                        do {
+                            myThread2.sleep(500);
+                        }
+                        while (!bankomat2);
+                    }
+                    returnAddOrPull = accounts.get(number).accoutAction();
+                    temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                } else {
+                    jLabelEvent2.setText("Состояние: банкомат недоступен для снятия");
+                    if (!temp.substring(0).equals(AccountActions.PULL_OFF.getTitle())) {
+                        jTextAreaJPanel2.append(temp.toString() + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                        bankomatCashAmount2 += returnAddOrPull.addOrPull;
+                        if (bankomatCashAmount2 > 0) jLabelEvent2.setText("Состояние: банкомат полностью исправен");
+                        numberOperation2++;
+                        jLabelNumberOperation2.setText("Количество завершенных операций: " + numberOperation2);
+                        myThread2.sleep(2500 - new Random().nextInt(500));
+                        tempError = new Random().nextInt(50);
+                        if (tempError < 1) {//рандом ошибки
+                            bankomat2 = false;
+                            JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 2\n" +
+                                    "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                            jButtonTechnicalSupport2.setEnabled(!bankomat2);
+                            do {
+                                myThread2.sleep(500);
+                            }
+                            while (!bankomat2);
+                        }
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    } else {
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    }
+                }
+            }
+            jTextAreaJPanel2.append(temp.toString() + "\n");
+            numberOperation2++;
+            jLabelNumberOperation2.setText("Количество завершенных операций: " + numberOperation2);
+            myThread2.sleep(2500 - new Random().nextInt(500));
+            tempError = new Random().nextInt(50);
+            if (tempError < 1) {//рандом ошибки
+                bankomat2 = false;
+                JOptionPane.showMessageDialog(jFrame, "Банкомат 2 съел карту\n" +
+                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                jButtonTechnicalSupport2.setEnabled(!bankomat2);
+                do {
+                    myThread2.sleep(500);
+                }
+                while (!bankomat2);
+            } else {
+                tempError = new Random().nextInt(50);
+                if (tempError < 1) {//рандом ошибки
                     bankomat2 = false;
                     JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 2\n" +
                             "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -373,28 +560,6 @@ public class AppearanceATM implements ActionListener {
                     }
                     while (!bankomat2);
                 }
-                temp.replace(0, temp.length(), accounts.get(number).accoutAction());
-            }
-            jTextAreaJPanel2.append(temp.toString() + "\n");
-            myThread2.sleep(2500 - new Random().nextInt(500));
-            if ((new Random().nextInt(25)) < 2) {
-                bankomat2 = false;
-                JOptionPane.showMessageDialog(jFrame, "Банкомат 2 съел карту\n" +
-                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                jButtonTechnicalSupport2.setEnabled(!bankomat2);
-                do {
-                    myThread2.sleep(500);
-                }
-                while (!bankomat2);
-            } else if ((new Random().nextInt(55)) < 2) {
-                bankomat2 = false;
-                JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 2\n" +
-                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                jButtonTechnicalSupport2.setEnabled(!bankomat2);
-                do {
-                    myThread2.sleep(500);
-                }
-                while (!bankomat2);
             }
             return;
         } catch (InterruptedException e) {
@@ -405,10 +570,15 @@ public class AppearanceATM implements ActionListener {
     public void runAccountActions3(int number) {
         try {
             setNumberAccounts.remove(number);
-            StringBuffer temp = new StringBuffer(accounts.get(number).accoutAction());
+            ReturnAddOrPull returnAddOrPull = accounts.get(number).accoutAction();
+            StringBuffer temp = new StringBuffer(returnAddOrPull.action);
+            if (bankomatCashAmount3 > 0) jLabelEvent3.setText("Состояние: банкомат полностью исправен");
             jTextAreaJPanel3.append(String.valueOf(number) + " " + temp.toString() + "\n");
+            numberOperation3++;
+            jLabelNumberOperation3.setText("Количество завершенных операций: " + numberOperation3);
             myThread3.sleep(2500 - new Random().nextInt(500));
-            if ((new Random().nextInt(10)) < 2) {
+            int tempError = new Random().nextInt(50);
+            if (tempError < 1) {//рандом ошибки
                 bankomat3 = false;
                 JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 3\n" +
                         "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -418,11 +588,88 @@ public class AppearanceATM implements ActionListener {
                 }
                 while (!bankomat3);
             }
-            temp.replace(0, temp.length(), accounts.get(number).accoutAction());
+            returnAddOrPull = accounts.get(number).accoutAction();
+            temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+            if (bankomatCashAmount3 > 0) jLabelEvent3.setText("Состояние: банкомат полностью исправен");
             while (!temp.substring(0).equals(AccountActions.END_OF_SERVICE.getTitle())) {
-                jTextAreaJPanel3.append(temp.toString() + "\n");
-                myThread3.sleep(2500 - new Random().nextInt(500));
-                if ((new Random().nextInt(10)) < 2) {
+                if (bankomatCashAmount3 != 0) {
+                    jLabelEvent3.setText("Состояние: банкомат полностью исправен");
+                    if ( (bankomatCashAmount3 < Math.abs(returnAddOrPull.addOrPull)) && (returnAddOrPull.addOrPull < 0) && temp.substring(0).equals((AccountActions.PULL_OFF.getTitle())) ) {
+                        returnAddOrPull.addOrPull = -bankomatCashAmount3;
+                        jTextAreaJPanel3.append(String.valueOf(AccountActions.PULL_OFF.getTitle()) + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                        bankomatCashAmount3 += returnAddOrPull.addOrPull;
+                        numberOperation3++;
+                        jLabelNumberOperation3.setText("Количество завершенных операций: " + numberOperation3);
+                        jLabelEvent3.setText("Состояние: банкомат недоступен для снятия");
+                        myThread3.sleep(2500 - new Random().nextInt(500));
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                        continue;
+                    }
+                    jTextAreaJPanel3.append(temp.toString() + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                    bankomatCashAmount3 += returnAddOrPull.addOrPull;
+                    if (bankomatCashAmount3 > 0) jLabelEvent3.setText("Состояние: банкомат полностью исправен");
+                    numberOperation3++;
+                    jLabelNumberOperation3.setText("Количество завершенных операций: " + numberOperation3);
+                    myThread3.sleep(2500 - new Random().nextInt(500));
+                    tempError = new Random().nextInt(50);
+                    if (tempError < 1) {//рандом ошибки
+                        bankomat3 = false;
+                        JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 3\n" +
+                                "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        jButtonTechnicalSupport3.setEnabled(!bankomat3);
+                        do {
+                            myThread3.sleep(500);
+                        }
+                        while (!bankomat3);
+                    }
+                    returnAddOrPull = accounts.get(number).accoutAction();
+                    temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                } else {
+                    jLabelEvent3.setText("Состояние: банкомат недоступен для снятия");
+                    if (!temp.substring(0).equals(AccountActions.PULL_OFF.getTitle())) {
+                        jTextAreaJPanel3.append(temp.toString() + " " + Math.abs(returnAddOrPull.addOrPull) + "\n");
+                        bankomatCashAmount3 += returnAddOrPull.addOrPull;
+                        if (bankomatCashAmount3 > 0) jLabelEvent3.setText("Состояние: банкомат полностью исправен");
+                        numberOperation3++;
+                        jLabelNumberOperation3.setText("Количество завершенных операций: " + numberOperation3);
+                        myThread3.sleep(2500 - new Random().nextInt(500));
+                        tempError = new Random().nextInt(50);
+                        if (tempError < 1) {//рандом ошибки
+                            bankomat3 = false;
+                            JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 3\n" +
+                                    "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                            jButtonTechnicalSupport3.setEnabled(!bankomat3);
+                            do {
+                                myThread3.sleep(500);
+                            }
+                            while (!bankomat3);
+                        }
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    } else {
+                        returnAddOrPull = accounts.get(number).accoutAction();
+                        temp.replace(0, temp.length(), String.valueOf(returnAddOrPull.action));
+                    }
+                }
+            }
+            jTextAreaJPanel3.append(temp.toString() + "\n");
+            numberOperation3++;
+            jLabelNumberOperation3.setText("Количество завершенных операций: " + numberOperation3);
+            myThread3.sleep(2500 - new Random().nextInt(500));
+            tempError = new Random().nextInt(50);
+            if (tempError < 1) {//рандом ошибки
+                bankomat3 = false;
+                JOptionPane.showMessageDialog(jFrame, "Банкомат 3 съел карту\n" +
+                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                jButtonTechnicalSupport3.setEnabled(!bankomat3);
+                do {
+                    myThread3.sleep(500);
+                }
+                while (!bankomat3);
+            } else {
+                tempError = new Random().nextInt(50);
+                if (tempError < 1) {//рандом ошибки
                     bankomat3 = false;
                     JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 3\n" +
                             "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -432,28 +679,6 @@ public class AppearanceATM implements ActionListener {
                     }
                     while (!bankomat3);
                 }
-                temp.replace(0, temp.length(), accounts.get(number).accoutAction());
-            }
-            jTextAreaJPanel3.append(temp.toString() + "\n");
-            myThread3.sleep(2500 - new Random().nextInt(500));
-            if ((new Random().nextInt(25)) < 1) {
-                bankomat3 = false;
-                JOptionPane.showMessageDialog(jFrame, "Банкомат 3 съел карту\n" +
-                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                jButtonTechnicalSupport3.setEnabled(!bankomat3);
-                do {
-                    myThread3.sleep(500);
-                }
-                while (!bankomat3);
-            } else if ((new Random().nextInt(10)) < 2) {
-                bankomat3 = false;
-                JOptionPane.showMessageDialog(jFrame, "Ошибка подключения к серверу у банкомата 3\n" +
-                        "Пожалуйста, вызовете тех.поддержку", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                jButtonTechnicalSupport3.setEnabled(!bankomat3);
-                do {
-                    myThread3.sleep(500);
-                }
-                while (!bankomat3);
             }
             return;
         } catch (InterruptedException e) {
